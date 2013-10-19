@@ -38,6 +38,11 @@ var opl = new L.OverPassLayer({
 
 map.addLayer(opl);
 
+function initialize() {
+    gapi.client.setApiKey(apiKey);
+}
+
+
 // Execute the client request.
 function runClientRequest(request, callback) {
     var restRequest = gapi.client.request(request);
