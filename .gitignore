@@ -1,3 +1,4 @@
 .ropeproject/
 stationnement_velo_mtl.egg-info/
 ~
+*.pyc
