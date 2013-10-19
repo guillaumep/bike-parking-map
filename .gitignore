@@ -2,3 +2,8 @@
 stationnement_velo_mtl.egg-info/
 ~
 *.pyc
+.Python
+bin/
+include/
+lib/
+*.egg/
