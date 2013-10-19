@@ -104,17 +104,22 @@ L.control.locate({
 }).addTo(map);
 
 
-function submitValue(data) {
+function submitValue(data, popup) {
     $.post("/submit", data, function(data) {
-        console.log(data);
+        popup.closePopup();
     });
 }
 
 
 map.on("click", function(e) {
-    map.openPopup($("#form").html(), e.latlng);
+    var lat = e.latlng.lat;
+    var lng = e.latlng.lng;
+    var popup = map.openPopup($("#form").html(), e.latlng);
     $("#submit-button").on("click", function(e) {
-        submitValue($(this).parent().serializeArray());
+        var data = $(this).parent().serializeArray();
+        data[2] = {name: "lat", value: lat.toString()};
+        data[3] = {name: "lng", value: lng.toString()};
+        submitValue(data, popup);
         return false;
     });
 });
