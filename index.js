@@ -32,3 +32,6 @@ var opl = new L.OverPassLayer({
     },
 });
 map.addLayer(opl);
+map.on("click", function(e) {
+    map.openPopup("<html><body>ALLO</body></html>", e.latlng);
+});
