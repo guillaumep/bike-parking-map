@@ -4,6 +4,10 @@ var osm = new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 
 var map = new L.Map('map').addLayer(osm).setView(new L.LatLng(45.51947, -73.56017), 15);
 
+var clientId = '951575559952.apps.googleusercontent.com';
+var apiKey = 'AIzaSyB48YglC00Y2SGMRoOmfXu1RFcrUC3xb5k';
+
+
 //OverPassAPI overlay
 var opl = new L.OverPassLayer({
     query: "http://overpass-api.de/api/interpreter?data=[out:json];node(BBOX)[amenity=bicycle_parking];out;",
@@ -31,7 +35,81 @@ var opl = new L.OverPassLayer({
         }
     },
 });
+
 map.addLayer(opl);
+
+function initialize() {
+    gapi.client.setApiKey(apiKey);
+}
+
+
+// Execute the client request.
+function runClientRequest(request, callback) {
+    var restRequest = gapi.client.request(request);
+    restRequest.execute(callback);
+}
+
+
+var callback = function(element) {
+    return function(resp) {
+        var output = JSON.stringify(resp);
+        alert(output);
+    };
+}
+
+
+// Send an SQL query to Fusion Tables.
+function query(query) {
+    var lowerCaseQuery = query.toLowerCase();
+    var path = '/fusiontables/v1/query';
+    var callback = function(element) {
+        return function(resp) {
+            var output = JSON.stringify(resp);
+            document.getElementById(element).innerHTML = output;
+        };
+    }
+    if (lowerCaseQuery.indexOf('select') != 0 &&
+        lowerCaseQuery.indexOf('show') != 0 &&
+        lowerCaseQuery.indexOf('describe') != 0) {
+
+        var body = 'sql=' + encodeURIComponent(query);
+        runClientRequest({
+            path: path,
+            body: body,
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'Content-Length': body.length
+            },
+            method: 'POST'
+        }, callback('insert-data-output'));
+
+    } else {
+        runClientRequest({
+            path: path,
+            params: { 'sql': query }
+        }, callback());
+    }
+}
+
+
+function submitValue(values) {
+    var tableId = "1mTHq1dSxMRNHgCuViHyhi9RiNBv681c7LZdlaVU";
+    var path = '/fusiontables/v1/query';
+
+    var insert = [];
+    insert.push('INSERT INTO ');
+    insert.push(tableId);
+    insert.push(' (Purpose, Comments) VALUES (');
+    insert.push(values);
+    insert.push(')');
+    query(insert.join(''));
+}
+
+
 map.on("click", function(e) {
     map.openPopup($("#form").html(), e.latlng);
+    $("#submit-button").on("click", function(e) {
+        submitValue(($(this).serialize()));
+        return false;
+    });
 });
