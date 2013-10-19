@@ -14,6 +14,11 @@ def index():
     return static_file("index.html", os.path.join(dirname, "media"))
 
 
+@route('/favicon.ico')
+def favicon():
+    return static_file("favicon.ico", os.path.join(dirname, "media"))
+
+
 @route('/requests')
 def requests():
     values = []
@@ -37,7 +42,6 @@ def submit(*args, **kwargs):
 @route('/media/<path:path>')
 def callback(path):
     return static_file(path, os.path.join(dirname, "media"))
-
 
 
 if __name__ == "__main__":
