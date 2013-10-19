@@ -1,7 +1,16 @@
-var attribution = 'Map data &copy; <a href="http://openstreetmap.org/">OpenStreetMap</a> contributors, Ville de Montréal, Stationnement Montréal';
-var osm = new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {opacity: 0.7, attribution: [attribution].join(', ')});
+var osm_attrib = 'Map data &copy; <a href="http://openstreetmap.org/">OpenStreetMap</a> contributors',
+    cycle_attrib = 'OpenCycleMap',
+    mtl_attrib = 'Ville de Montréal, Stationnement Montréal';
+var osmLayer = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {opacity: 0.7, 
+                            attribution: [osm_attrib, mtl_attrib].join(', ')});
+var openCycleMapLayer = L.tileLayer('http://{s}.tile.opencyclemap.org/cycle/{z}/{x}/{y}.png', {opacity: 0.7,
+                            attribution: [osm_attrib, cycle_attrib, mtl_attrib].join(', ')});
 
-var map = new L.Map('map').addLayer(osm).setView(new L.LatLng(45.51947, -73.56017), 15);
+var map = L.map('map', {
+    center: new L.LatLng(45.51947, -73.56017),
+    zoom: 15,
+    layers: [openCycleMapLayer]
+});
 
 //OverPassAPI overlay
 var opl = new L.OverPassLayer({
@@ -33,6 +42,34 @@ var opl = new L.OverPassLayer({
 
 map.addLayer(opl);
 
+// Heatmap layer
+
+ var heatmapLayer = L.TileLayer.heatMap({
+radius: 20,
+opacity: 0.8,
+gradient: {
+0.45: "rgb(0,0,255)",
+0.55: "rgb(0,255,255)",
+0.65: "rgb(0,255,0)",
+0.95: "yellow",
+1.0: "rgb(255,0,0)"
+}
+});
+
+  var testData={
+max: 46,
+data: [{lat: 45.764, lon:-73.8974, value: 1},{lat: 45.867, lon:-73.8576, value: 1}, {lat: 45.8437, lon:-73.976, value: 1}]
+};
+
+heatmapLayer.addData(testData.data);
+
+var overlayMaps = {
+'Heatmap': heatmapLayer
+};
+ map.addLayer(heatmapLayer);
+var controls = L.control.layers(null, overlayMaps, {collapsed: false});
+
+
 //GeoJSON layers
 
 parco_point_to_layer = function (feature, latlng) {
@@ -43,7 +80,7 @@ parco_point_to_layer = function (feature, latlng) {
     });
     return L.marker(latlng, {icon: icon});
 }
-L.geoJson(parcometres, {pointToLayer: parco_point_to_layer}).addTo(map);
+sm_layer = L.geoJson(parcometres, {pointToLayer: parco_point_to_layer}).addTo(map);
 
 support_point_to_layer = function (feature, latlng) {
     var icon = L.icon({
@@ -53,7 +90,26 @@ support_point_to_layer = function (feature, latlng) {
     });
     return L.marker(latlng, {icon: icon});
 }
-L.geoJson(support_velo_sigs, {pointToLayer: support_point_to_layer}).addTo(map);
+vdm_layer = L.geoJson(support_velo_sigs, {pointToLayer: support_point_to_layer}).addTo(map);
+
+
+var baseLayers = {
+    "OpenCycleMap": openCycleMapLayer,
+    "OpenStreetMap": osmLayer
+};
+
+var overlays = {
+    "Données d'OpenStreetMap": opl,
+    "Données de la Ville de Montréal": vdm_layer,
+    "Données de Stationnement Montréal": sm_layer
+};
+
+L.control.layers(baseLayers, overlays).addTo(map);
+
+L.control.locate({
+    follow: true,
+    stopFollowingOnDrag: true
+}).addTo(map);
 
 
 function submitValue(data, popup) {
