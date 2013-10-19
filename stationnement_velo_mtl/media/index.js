@@ -1,7 +1,16 @@
-var attribution = 'Map data &copy; <a href="http://openstreetmap.org/">OpenStreetMap</a> contributors, Ville de Montréal, Stationnement Montréal';
-var osm = new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {opacity: 0.7, attribution: [attribution].join(', ')});
+var osm_attrib = 'Map data &copy; <a href="http://openstreetmap.org/">OpenStreetMap</a> contributors',
+    cycle_attrib = 'OpenCycleMap',
+    mtl_attrib = 'Ville de Montréal, Stationnement Montréal';
+var osmLayer = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {opacity: 0.7, 
+                            attribution: [osm_attrib, mtl_attrib].join(', ')});
+var openCycleMapLayer = L.tileLayer('http://{s}.tile.opencyclemap.org/cycle/{z}/{x}/{y}.png', {opacity: 0.7,
+                            attribution: [osm_attrib, cycle_attrib, mtl_attrib].join(', ')});
 
-var map = new L.Map('map').addLayer(osm).setView(new L.LatLng(45.51947, -73.56017), 15);
+var map = L.map('map', {
+    center: new L.LatLng(45.51947, -73.56017),
+    zoom: 15,
+    layers: [osmLayer, openCycleMapLayer]
+});
 
 //OverPassAPI overlay
 var opl = new L.OverPassLayer({
@@ -43,7 +52,7 @@ parco_point_to_layer = function (feature, latlng) {
     });
     return L.marker(latlng, {icon: icon});
 }
-L.geoJson(parcometres, {pointToLayer: parco_point_to_layer}).addTo(map);
+sm_layer = L.geoJson(parcometres, {pointToLayer: parco_point_to_layer}).addTo(map);
 
 support_point_to_layer = function (feature, latlng) {
     var icon = L.icon({
@@ -53,7 +62,22 @@ support_point_to_layer = function (feature, latlng) {
     });
     return L.marker(latlng, {icon: icon});
 }
-L.geoJson(support_velo_sigs, {pointToLayer: support_point_to_layer}).addTo(map);
+vdm_layer = L.geoJson(support_velo_sigs, {pointToLayer: support_point_to_layer}).addTo(map);
+
+
+var baseLayers = {
+    "OpenStreetMap": osmLayer,
+    "OpenCycleMap": openCycleMapLayer
+};
+
+var overlays = {
+    "Données d'OpenStreetMap": opl,
+    "Données de la Ville de Montréal": vdm_layer,
+    "Données de Stationnement Montréal": sm_layer
+};
+
+L.control.layers(baseLayers, overlays).addTo(map);
+
 
 
 function submitValue(data) {
