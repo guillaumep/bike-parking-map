@@ -78,6 +78,10 @@ var overlays = {
 
 L.control.layers(baseLayers, overlays).addTo(map);
 
+L.control.locate({
+    follow: true,
+    stopFollowingOnDrag: true
+}).addTo(map);
 
 
 function submitValue(data) {
