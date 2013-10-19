@@ -14,11 +14,13 @@ def index():
 
 @post('/submit')
 def submit(*args, **kwargs):
-    db["requests"].insert(dict(
+    value = db["requests"].insert(dict(
         comment = request.forms.comment,
-        purpose = request.forms.purpose
+        purpose = request.forms.purpose,
+        lat = request.forms.lat,
+        lng = request.forms.lng
     ))
-    return "ok"
+    return {"status": str(value)}
 
 @route('/media/<path:path>')
 def callback(path):
