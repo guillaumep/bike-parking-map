@@ -11,7 +11,7 @@ def main():
 		point = geojson.Point(coordinates=(float(row['LONG']), float(row['LAT'])))
 		features.append(geojson.Feature(geometry=point))
 	collection = geojson.FeatureCollection(features)
-	print collection
+	print geojson.dumps(collection)
 
 if __name__ == '__main__':
 	main()

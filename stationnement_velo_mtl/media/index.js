@@ -1,6 +1,5 @@
-var attr_osm = 'Map data &copy; <a href="http://openstreetmap.org/">OpenStreetMap</a> contributors',
-    attr_overpass = 'POI via <a href="http://www.overpass-api.de/">Overpass API</a>';
-var osm = new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {opacity: 0.7, attribution: [attr_osm, attr_overpass].join(', ')});
+var attribution = 'Map data &copy; <a href="http://openstreetmap.org/">OpenStreetMap</a> contributors, Ville de Montréal, Stationnement Montréal';
+var osm = new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {opacity: 0.7, attribution: [attribution].join(', ')});
 
 var map = new L.Map('map').addLayer(osm).setView(new L.LatLng(45.51947, -73.56017), 15);
 
@@ -16,10 +15,10 @@ var opl = new L.OverPassLayer({
             var pos = new L.LatLng(e.lat, e.lon);
             var popup = this.instance._poiInfo(e.tags,e.id);
             var icon = L.icon({
-                iconUrl: '/media/velo.png',
+                iconUrl: '/media/icon_bike_blue.png',
                 //shadowUrl: 'leaf-shadow.png',
 
-                iconSize:     [30, 30], // size of the icon
+                iconSize:     [25, 32], // size of the icon
                 //shadowSize:   [50, 64], // size of the shadow
                 //iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
                 //shadowAnchor: [4, 62],  // the same for the shadow
@@ -33,6 +32,28 @@ var opl = new L.OverPassLayer({
 });
 
 map.addLayer(opl);
+
+//GeoJSON layers
+
+parco_point_to_layer = function (feature, latlng) {
+    var icon = L.icon({
+        iconUrl: '/media/icon_parking.png',
+        iconSize:     [25, 32], // size of the icon
+        popupAnchor:  [0, -20] // point from which the popup should open relative to the iconAnchor
+    });
+    return L.marker(latlng, {icon: icon});
+}
+L.geoJson(parcometres, {pointToLayer: parco_point_to_layer}).addTo(map);
+
+support_point_to_layer = function (feature, latlng) {
+    var icon = L.icon({
+        iconUrl: '/media/icon_bike_green.png',
+        iconSize:     [25, 32], // size of the icon
+        popupAnchor:  [0, -20] // point from which the popup should open relative to the iconAnchor
+    });
+    return L.marker(latlng, {icon: icon});
+}
+L.geoJson(support_velo_sigs, {pointToLayer: support_point_to_layer}).addTo(map);
 
 
 function submitValue(data) {
