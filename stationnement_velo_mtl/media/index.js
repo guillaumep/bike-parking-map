@@ -9,7 +9,7 @@ var openCycleMapLayer = L.tileLayer('http://{s}.tile.opencyclemap.org/cycle/{z}/
 var map = L.map('map', {
     center: new L.LatLng(45.51947, -73.56017),
     zoom: 15,
-    layers: [osmLayer, openCycleMapLayer]
+    layers: [openCycleMapLayer]
 });
 
 //OverPassAPI overlay
@@ -66,8 +66,8 @@ vdm_layer = L.geoJson(support_velo_sigs, {pointToLayer: support_point_to_layer})
 
 
 var baseLayers = {
-    "OpenStreetMap": osmLayer,
-    "OpenCycleMap": openCycleMapLayer
+    "OpenCycleMap": openCycleMapLayer,
+    "OpenStreetMap": osmLayer
 };
 
 var overlays = {
