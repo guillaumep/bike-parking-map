@@ -18,7 +18,7 @@ def index():
 def requests():
     values = []
     for v in db.requests.find():
-        values.append(dict(lat=v["lat"], lng=v["lng"], value=1))
+        values.append(dict(lat=v["lat"], lon=v["lng"], value=1))
     response.content_type = 'application/json'
     return dumps(values)
 
