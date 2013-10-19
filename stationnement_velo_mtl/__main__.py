@@ -46,4 +46,4 @@ if __name__ == "__main__":
     conn = "mongodb://velomtl:%s@ds049888.mongolab.com:49888/velomtl"
     conn = conn % sys.argv[1]
     db = pymongo.MongoClient(conn)["velomtl"]
-    run(host='localhost', port=8091)
+    run(host='0.0.0.0', port=8091)
