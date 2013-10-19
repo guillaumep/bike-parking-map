@@ -1,17 +1,39 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>OverPass Layer Demo</title>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="http://code.jquery.com/jquery-1.8.0.min.js"></script>
-  <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.6.2/leaflet.css" />
-  <link href="style.css" media="all" rel="stylesheet" type="text/css" />
-  <script src="http://cdn.leafletjs.com/leaflet-0.6.2/leaflet-src.js"></script>
-  <script src="OverPassLayer.js"></script>
-</head>
-<body>
-  <div id="map"></div>
-  <script src="index.js"></script>
-</body>
+  <head>
+    <title>Stationnement vélo-mtl</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="http://code.jquery.com/jquery-1.8.0.min.js"></script>
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.6.2/leaflet.css" />
+    <link href="style.css" media="all" rel="stylesheet" type="text/css" />
+    <script src="http://cdn.leafletjs.com/leaflet-0.6.2/leaflet-src.js"></script>
+    <script src="OverPassLayer.js"></script>
+  </head>
+  <body>
+    <div id="map"></div>
+    <div id="form">
+      <form id="formvelo" name="formvelo">
+        <p>Raison de d&eacute;placement<br> Trip purpose</p>
+        <p>
+          <select name="purpose">
+            <option value='shopping'>Magasinage / Shopping</option>
+            <option value='work'>Travail / Work</option>
+            <option value='school'>&Eacute;cole / School</option>
+            <option value='social'>Social / Social</option>
+            <option value='other'>Autre / Other</option>
+          </select>
+        </p>
+
+        <p>Commentaire / Comment </p>
+        <p>
+          <input type="text" name="comment">
+        </p>
+        <input type="button" id="submit-button" value="OK">
+
+      </form>
+    </div>
+    <script src="https://apis.google.com/js/client.js?onload=initialize"></script>
+    <script src="index.js"></script>
+  </body>
 </html>
