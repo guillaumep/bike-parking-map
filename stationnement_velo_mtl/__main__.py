@@ -2,7 +2,9 @@ import sys
 import os
 import pymongo
 
-from bottle import route, run, static_file, post, request
+from json import dumps
+
+from bottle import route, run, static_file, post, request, response
 
 dirname = os.path.dirname(__file__)
 db = None
@@ -10,6 +12,15 @@ db = None
 @route('/')
 def index():
     return static_file("index.html", os.path.join(dirname, "media"))
+
+
+@route('/requests')
+def requests():
+    values = []
+    for v in db.requests.find():
+        values.append(dict(lat=v["lat"], lng=v["lng"], value=1))
+    response.content_type = 'application/json'
+    return dumps(values)
 
 
 @post('/submit')
@@ -22,9 +33,11 @@ def submit(*args, **kwargs):
     ))
     return {"status": str(value)}
 
+
 @route('/media/<path:path>')
 def callback(path):
     return static_file(path, os.path.join(dirname, "media"))
+
 
 
 if __name__ == "__main__":
