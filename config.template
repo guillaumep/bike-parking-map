@@ -1,0 +1,6 @@
+[app.main]
+db.connexion = mongodb://username:password@server:port/username
+db.name = dbname
+
+server.host = 0.0.0.0
+server.port = 8091

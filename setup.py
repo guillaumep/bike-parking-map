@@ -8,4 +8,8 @@ setup(
         "bottle",
         "requests",
         "pymongo",
-    ])
+    ],
+    entry_points="""
+    [console_scripts]
+    velomtl = stationnement_velo_mtl:main
+    """)

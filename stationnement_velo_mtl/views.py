@@ -1,13 +1,16 @@
-import sys
+# -*- coding: utf-8 -*-
+
+""" Bottle routes """
+
 import os
-import pymongo
 
 from json import dumps
 
-from bottle import route, run, static_file, post, request, response
+from bottle import route, static_file, post, request, response
 
 dirname = os.path.dirname(__file__)
 db = None
+
 
 @route('/')
 def index():
@@ -30,7 +33,7 @@ def requests():
 
 @post('/submit')
 def submit(*args, **kwargs):
-    value = db["requests"].insert(dict(
+    value = db.requests.insert(dict(
         comment = request.forms.comment,
         purpose = request.forms.purpose,
         lat = request.forms.lat,
@@ -42,12 +45,3 @@ def submit(*args, **kwargs):
 @route('/media/<path:path>')
 def callback(path):
     return static_file(path, os.path.join(dirname, "media"))
-
-
-if __name__ == "__main__":
-    if len(sys.argv) <= 1:
-        raise Exception("Missing password")
-    conn = "mongodb://velomtl:%s@ds049888.mongolab.com:49888/velomtl"
-    conn = conn % sys.argv[1]
-    db = pymongo.MongoClient(conn)["velomtl"]
-    run(host='0.0.0.0', port=8091)
