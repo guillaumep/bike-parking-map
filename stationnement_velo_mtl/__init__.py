@@ -24,8 +24,7 @@ def main():
     views.db = pymongo.MongoClient(config["db.connexion"])[config["db.name"]]
 
     if config["prod"]:
-        return run(server='flup',
-                   options={'bindAddress': config["server.sock"]})
+        return run(server='flup', bindAddress=config["server.sock"])
     else:
         return run(host=config["server.host"], port=config["server.port"])
 
