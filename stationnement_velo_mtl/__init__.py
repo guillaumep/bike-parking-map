@@ -21,9 +21,13 @@ def main():
     args = parse_args()
     config = VeloConfigParser()
     config.read(args.conf_file)
-    confs = config.as_dict()["app.main"]
-    views.db = pymongo.MongoClient(confs["db.connexion"])[confs["db.name"]]
-    run(host=confs["server.host"], port=confs["server.port"])
+    views.db = pymongo.MongoClient(config["db.connexion"])[config["db.name"]]
+
+    if config["prod"]:
+        return run(server='flup',
+                   options={'bindAddress': config["server.sock"]})
+    else:
+        return run(host=config["server.host"], port=config["server.port"])
 
 
 if __name__ == "__main__":

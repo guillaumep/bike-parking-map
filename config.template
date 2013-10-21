@@ -2,5 +2,8 @@
 db.connexion = mongodb://username:password@server:port/username
 db.name = dbname
 
+prod = false
+
 server.host = 0.0.0.0
 server.port = 8091
+server.sock = /sites/velomtl.arrak.org/velo.sock
