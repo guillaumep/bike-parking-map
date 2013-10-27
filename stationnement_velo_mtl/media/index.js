@@ -56,11 +56,12 @@ var heatmapLayer = L.TileLayer.heatMap({
     }
 });
 
-heatmapLayer.on('loading', function(){
-    $.getJSON("/requests", function(data) {
-       heatmapLayer.setData(data);
-    })
-})
+$.getJSON("/requests", function(data) {
+    if (data) {
+        heatmapLayer.setData(data);
+        heatmapLayer.redraw();
+    }
+});
 //var data = [{lat: 45.764, lon:-73.8974, value: 1},{lat: 45.867, lon:-73.8576, value: 1}, {lat: 45.8437, lon:-73.976, value: 1}];
 
 
@@ -113,7 +114,7 @@ info.onAdd = function (map) {
 // properties passed
 info.update = function (props) {
     this._div.innerHTML = '<h4>Stationnement pour vélos à Montréal</h4>'
-        +'Cliquez pour demander plus de stationnement';
+        +'Cliquez sur la carte pour suggérer un nouvel espace de stationnement';
 };
 
 info.addTo(map);
