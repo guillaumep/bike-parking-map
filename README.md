@@ -59,7 +59,10 @@ To suggest a bike parking, click on the map at the approximate location where yo
 
 You can view the requests that other users of the website did by clicking on the top-right icon (the three gray "sheets" on top of each other), then selecting "Demandes de stationnement" (the last item). Red dots will appear on the map, indicating the location where requests have been made.
 
-Now a few technical notes. Read on if you are interested in knowing more about this project.
+A few technical notes
+---------------------
+
+Read on if you are interested in knowing more about this project.
 
 The background comes from a project called OpenCycleMap: http://www.opencyclemap.org/. It highlights the bicycle paths in blue. This map is rendered using OpenStreetMap data, so it can be modified the same way. See http://wiki.openstreetmap.org/wiki/OpenCycleMap for more information.
 
