@@ -77,3 +77,5 @@ If you have questions about OpenStreetMap in Montreal, please feel free to conta
 This project was built in one day (!) at the ÉcoHackMtl, Montreal's first Urban Sustainability hackathon, that was held October 19th, 2013. A public vote is now being held by the organizers of the event, and a price will be given to the best project. Please visit http://ecohackmtl.sparkboard.com/ if you would like to vote for this project, and as many other project as you would like (voting for more than one project is allowed). 
 
 This project is an original idea of Zvi Leve and was implemented by Guillaume Pratte, Mathieu Leduc-Hamel and Françoise Provencher on October 19th, 2013.
+
+The source code is available at https://github.com/guillaumep/stationnement_velo_mtl/.
