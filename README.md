@@ -1,5 +1,5 @@
-stationnement_velo_mtl
-======================
+bike-parking-map
+================
 
 Où sont les stationnements de vélos à Montréal
 
