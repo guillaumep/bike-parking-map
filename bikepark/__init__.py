@@ -2,9 +2,9 @@
 
 import sys
 import pymongo
-import stationnement_velo_mtl.views as views
+import bikepark.views as views
 
-from stationnement_velo_mtl.config import VeloConfigParser
+from bikepark.config import VeloConfigParser
 
 from argparse import ArgumentParser
 

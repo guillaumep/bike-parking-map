@@ -1,5 +1,5 @@
 .ropeproject/
-stationnement_velo_mtl.egg-info/
+*.egg-info/
 local.ini
 ~
 *.pyc

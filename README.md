@@ -16,17 +16,17 @@ Installation
 
 Obtention des sources::
 
-    $ git clone https://github.com/guillaumep/stationnement_velo_mtl.git
+    $ git clone https://github.com/guillaumep/bike-parking-map_mtl.git
 
 Création du virtualenv::
 
-    $ virtualenv ~/velomtl-venv
-    $ source ~/velomtl-venv/bin/activate
-    $ python stationnement_velo_mtl/setup.py develop
+    $ virtualenv ~/bikepark-venv
+    $ source ~/bikepark-venv/bin/activate
+    $ python bike-parking-map/setup.py develop
 
 Création de la configuration::
 
-    $ cp stationnement_velo_mtl/config.template stationnement_velo_mtl/local.ini
+    $ cp bike-parking-map/config.template stationnement_velo_mtl/local.ini
 
 Il ne vous reste ensuite que d'y mettre les bonnes informations quant à votre
 serveur mongodb ainsi que votre `hostname` et votre numéro de port.
@@ -36,7 +36,7 @@ Utilisation
 
 Pour lancer le serveur il s'agit seulement de::
 
-    $ velomtl stationnement_velo_mtl/local.ini
+    $ bikepark bike-parking-map/local.ini
 
 Documentation
 -------------
@@ -74,8 +74,8 @@ Note that this website is, for now, best viewed on a desktop or on a laptop. It 
 
 If you have questions about OpenStreetMap in Montreal, please feel free to contact the OpenStreetMap Montreal user group, by accessing their website ( http://www.osmtl.org/ ) or writing to their mailing list: http://listes.openstreetmap-montreal.org/listinfo.cgi/osmtl-openstreetmap-montreal.org . Even though the website is only in French for now, the user group welcomes English speakers.
 
-This project was built in one day (!) at the ÉcoHackMtl, Montreal's first Urban Sustainability hackathon, that was held October 19th, 2013. A public vote is now being held by the organizers of the event, and a price will be given to the best project. Please visit http://ecohackmtl.sparkboard.com/ if you would like to vote for this project, and as many other project as you would like (voting for more than one project is allowed). 
+This project was built in one day (!) at the ÉcoHackMtl, Montreal's first Urban Sustainability hackathon, that was held October 19th, 2013. A public vote is now being held by the organizers of the event, and a price will be given to the best project. Please visit http://ecohackmtl.sparkboard.com/ if you would like to vote for this project, and as many other project as you would like (voting for more than one project is allowed).
 
 This project is an original idea of Zvi Leve and was implemented by Guillaume Pratte, Mathieu Leduc-Hamel and Françoise Provencher on October 19th, 2013.
 
-The source code is available at https://github.com/guillaumep/stationnement_velo_mtl/.
+The source code is available at https://github.com/guillaumep/bike-parking-map/.
