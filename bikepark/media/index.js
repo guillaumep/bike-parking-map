@@ -24,14 +24,10 @@ var opl = new L.OverPassLayer({
             var pos = new L.LatLng(e.lat, e.lon);
             var popup = this.instance._poiInfo(e.tags,e.id);
             var icon = L.icon({
-                iconUrl: '/media/icon_bike_blue.png',
-                //shadowUrl: 'leaf-shadow.png',
-
-                iconSize:     [25, 32], // size of the icon
-                //shadowSize:   [50, 64], // size of the shadow
-                //iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
-                //shadowAnchor: [4, 62],  // the same for the shadow
-                popupAnchor:  [0, -20] // point from which the popup should open relative to the iconAnchor
+                iconUrl: '/media/images/icon_bike_blue.png',
+                iconRetinaUrl: '/media/images/icon_bike_blue@2x.png',
+                iconSize:     [20, 26], // size of the icon
+                popupAnchor:  [0, 0] // point from which the popup should open relative to the iconAnchor
             });
             marker = L.marker(pos, {icon: icon}).bindPopup(popup);
 
@@ -71,19 +67,21 @@ $.getJSON("/requests", function(data) {
 
 parco_point_to_layer = function (feature, latlng) {
     var icon = L.icon({
-        iconUrl: '/media/icon_parking.png',
-        iconSize:     [25, 32], // size of the icon
-        popupAnchor:  [0, -20] // point from which the popup should open relative to the iconAnchor
-    });
+        iconUrl: '/media/images/icon_bike_parco.png',
+        iconRetinaUrl: '/media/images/icon_bike_parco@2x.png',
+        iconSize:     [20, 26], // size of the icon
+        popupAnchor:  [0, 0] // point from which the popup should open relative to the iconAnchor
+   });
     return L.marker(latlng, {icon: icon});
 }
 sm_layer = L.geoJson(parcometres, {pointToLayer: parco_point_to_layer}).addTo(map);
 
 support_point_to_layer = function (feature, latlng) {
     var icon = L.icon({
-        iconUrl: '/media/icon_bike_green.png',
-        iconSize:     [25, 32], // size of the icon
-        popupAnchor:  [0, -20] // point from which the popup should open relative to the iconAnchor
+        iconUrl: '/media/images/icon_bike_green.png',
+        iconRetinaUrl: '/media/images/icon_bike_green@2x.png',
+        iconSize:     [20, 26], // size of the icon
+        popupAnchor:  [0, 0] // point from which the popup should open relative to the iconAnchor
     });
     return L.marker(latlng, {icon: icon});
 }
