@@ -1,5 +1,6 @@
 import ConfigParser
 
+
 class VeloConfigParser(ConfigParser.ConfigParser):
     def as_dict(self):
         d = dict(self._sections)

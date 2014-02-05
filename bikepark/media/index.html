@@ -4,22 +4,41 @@
     <title>Stationnement vélo-mtl</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="http://code.jquery.com/jquery-1.8.0.min.js"></script>
-    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.6.2/leaflet.css" />
-    <link rel="stylesheet" href="/media/L.Control.Locate.css" />
-    <link href="/media/style.css" media="all" rel="stylesheet" type="text/css" />
-    <link rel="icon" type="image/ico" href="/media/favicon.ico" />
-    <script src="http://cdn.leafletjs.com/leaflet-0.6.2/leaflet-src.js"></script>
-    <script src="/media/OverPassLayer.js"></script>
-    <script src="/media/L.Control.Locate.js" ></script>
-    <script type="text/javascript" src="/media/QuadTree.js"></script>
-    <script type="text/javascript" src="/media/heatmap.js"></script>
-    <script type="text/javascript" src="/media/heatmap-leaflet.js"></script>
-    <script src="/media/donnees-ville-mtl/parcometres.js"></script>
-    <script src="/media/donnees-ville-mtl/support_velo_sigs.js"></script>
+
+    <script type="text/javascript" src="/media/js/jquery-1.8.0.min.js"></script>
+    <script type="text/javascript" src="/media/js/less-1.6.1.min.js"></script>
+    <script type="text/javascript" src="/media/js/bootstrap.js"></script>
+    <script type="text/javascript" src="/media/js/leaflet-src.js"></script>
+
+    <script type="text/javascript" src="/media/js/OverPassLayer.js"></script>
+    <script type="text/javascript" src="/media/js/L.Control.Locate.js" ></script>
+
+    <script type="text/javascript" src="/media/js/QuadTree.js"></script>
+    <script type="text/javascript" src="/media/js/heatmap.js"></script>
+    <script type="text/javascript" src="/media/js/heatmap-leaflet.js"></script>
+
+    <script type="text/javascript" src="/media/donnees-ville-mtl/parcometres.js"></script>
+    <script type="text/javascript" src="/media/donnees-ville-mtl/support_velo_sigs.js"></script>
+
+    <link type="text/less" href="/media/less/boostrap.less" rel="stylesheet/less" media="all" />
+
+    <link type="text/css" rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.6.2/leaflet.css" media="all" />
+    <link type="text/css" rel="stylesheet" href="/media/css/L.Control.Locate.css" media="all" />
+    <link type="text/css" rel="stylesheet" href="/media/css/style.css" media="all" />
+
+    <link type="image/ico" rel="icon" href="/media/favicon.ico" />
   </head>
   <body>
-    <div id="map"></div>
+    <div class="container">
+      <div class="row-fluid">
+        <div id="left-column" class="col-md-3">
+          allo
+        </div>
+        <div id="right-column" class="col-md-9">
+          <div id="map"></div>
+        </div>
+      </div>
+    </div>
     <div id="form">
       <form id="formvelo" name="formvelo">
         <p><b>Je veux un stationnement de vélo ici! / <br> I request bike parking here!</b> </p>
@@ -42,6 +61,6 @@
 
       </form>
     </div>
-    <script src="/media/index.js"></script>
+    <script src="/media/js/index.js"></script>
   </body>
 </html>
