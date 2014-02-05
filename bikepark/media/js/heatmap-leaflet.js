@@ -77,14 +77,17 @@
         g.restore();
     },
 
-    _createTileProto: function () {
-        var proto = this._canvasProto = L.DomUtil.create('div', 'leaflet-tile');
+    _createTile: function () {
+        var tile = L.DomUtil.create('div', 'leaflet-tile');
 
         var tileSize = this.options.tileSize;
-        proto.style.width = tileSize+"px";
-        proto.style.height = tileSize+"px";
-        proto.width = tileSize;
-        proto.height = tileSize;
+        tile.style.width = tileSize+"px";
+        tile.style.height = tileSize+"px";
+        tile.width = tileSize;
+        tile.height = tileSize;
+
+        tile.onselectstart = tile.onmousemove = L.Util.falseFn;
+        return tile;
     },
 
     /**
