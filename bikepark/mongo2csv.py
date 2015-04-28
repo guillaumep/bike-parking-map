@@ -1,6 +1,10 @@
 import sys
 import csv
+
 import pymongo
+
+from unidecode import unidecode
+
 from bikepark import parse_args
 from bikepark.config import VeloConfigParser
 
@@ -10,8 +14,11 @@ CSV_COLUMNS = ('lat', 'lng', 'comment', 'purpose')
 def dump(db, out):
     # ignoring _id
     csvwriter = csv.DictWriter(out, CSV_COLUMNS, extrasaction='ignore')
-    for i in db.requests.find():
-        csvwriter.writerow(i)
+
+    for i, item in enumerate(db.requests.find()):
+        item["comment"] = unidecode(item["comment"])
+        item["purpose"] = unidecode(item["purpose"])
+        csvwriter.writerow(item)
 
 
 def main():

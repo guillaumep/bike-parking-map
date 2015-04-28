@@ -9,8 +9,10 @@ setup(
         "requests",
         "pymongo",
         "flup",
+        "unidecode",
     ],
     entry_points="""
     [console_scripts]
     bikepark = bikepark:main
+    bikepark-export = bikepark.mongo2csv:main
     """)
